@@ -1,0 +1,23 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{{ form.media }}
+{{ ApropriacaoForm.media }}
+
+
+<h1>Apropriacao de horas da MiningMath</h1>
+
+
+<form method="post">{% csrf_token %}
+	    {% bootstrap_form form %}
+	        <input type="submit" value="Submit" />
+</form>
+
+{% load django_tables2 %}
+<a href="{% export_url "xls" %}"> xls </a>
+<br>
+<a href="/social/logout/"> Logout </a>
+
+
+{% render_table table %}
