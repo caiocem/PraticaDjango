@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
@@ -47,7 +48,12 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'django_tables2',
     'django_filters',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
+SITE_ID = 0
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -151,9 +157,10 @@ REST_FRAMEWORK = {
 }
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',
-    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+    #   'social_core.backends.google.GoogleOAuth2',
+    #   'rest_framework_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "99382647539-bfefkbjtjl4rradrdqlclnsl4f30psko.apps.googleusercontent.com"
@@ -179,5 +186,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'django.core.context_processors.request',
 )
-
+LOGIN_REDIRECT_URL = '/ap/new'
 # LOGIN_URL = 'django.contrib.auth.views.login'

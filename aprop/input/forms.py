@@ -1,3 +1,4 @@
+from bootstrap_datepicker_plus import DatePickerInput
 from django.forms import DateInput, ModelForm
 
 from .models import Apropriacao
@@ -7,6 +8,6 @@ class ApropriacaoForm(ModelForm):
     class Meta:
         model = Apropriacao
         fields = [
-            'referenciaApropriacao', 'colaborador', 'projeto', 'horas',
+            'referencia', 'projeto', 'duracao',
             'descricao'
         ]

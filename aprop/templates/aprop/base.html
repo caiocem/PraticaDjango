@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+
+{% block title %} Pagina de login {% endblock %}
+
+{% block main %}
+
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-info">Login</button>
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Desenvolvimento web com Django 2.x</span>
+      </div>
+    </footer>
+{% endblock %}
+I:\django\gestao_clientes\templates (master)
+(venv) λ cat base.html
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'stick-footer.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            {% block main %}
+            {% endblock %}
+        </div>
+    </div>
+
+    {% block footer %}
+    {% endblock %}
+
+</body>
+</html>
+

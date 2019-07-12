@@ -1,31 +1,34 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group, User
 from rest_framework import serializers
-from aprop.input.models import Apropriacao, Projeto, Colaborador
 
+from aprop.input.models import Apropriacao, Colaborador, Projeto
 
 
 class ApropriacaoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Apropriacao
-        fields = ('timestamp', 'referenciaApropriacao', 'colaborador', 'projeto', 'horas', 'descricao' )
+        fields = '__all__'
+
 
 class ProjetoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Projeto
-        fields = ('nome')
+        fields = '__all__'
+
 
 class ColaboradorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Colaborador
-        fields = ('email')
+        fields = '__all__'
+
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')
+        fields = '__all__'
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
-        fields = ('url', 'name')
+        fields = '__all__'

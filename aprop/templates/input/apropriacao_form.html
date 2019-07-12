@@ -3,8 +3,11 @@
 {% bootstrap_javascript jquery='full' %}
 
 {{ form.media }}
-<h1>Apropriacao Edit</h1>
+<h1>Apropriacao de horas da MiningMath</h1>
 <form method="post">{% csrf_token %}
 	    {% bootstrap_form form %}
 	        <input type="submit" value="Submit" />
 </form>
+
+{% load django_tables2 %}
+{% render_table table %}

@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin, auth
+from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.urls import include, path
 from django.utils.functional import curry
@@ -35,12 +36,15 @@ handler404 = curry(page_not_found, template_name='admin/404.html')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('auth/', include('rest_framework_social_oauth2.urls')),
+    #    path('auth/', include('rest_framework_social_oauth2.urls')),
     #    path('api-auth/', include('rest_framework.urls',
     #                              namespace='rest_framework')),
+    #    path('accounts/', include('django.contrib.auth.urls')),
+    path('social/', include('allauth.urls')),
+
     #    path('login/', views.home, name='home'),
-    path('rest-auth/', include('rest_auth.urls')),
-    path('accounts/login/$', LoginView.as_view(), name='admin/login.html'),
+    #   path('rest-auth/', include('rest_auth.urls')),
+    #    path('accounts/login/', LoginView.as_view(), name='admin/login.html'),
     path('ap/', views.ApropriacaoList.as_view(), name='apropriacao_list'),
     path('ap/view/<int:pk>',
          views.ApropriacaoView.as_view(),
