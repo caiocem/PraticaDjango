@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'django_pdb'
 ]
 SITE_ID = 0
 
@@ -63,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_pdb.middleware.PdbMiddleware',
+
 ]
 
 ROOT_URLCONF = 'aprop.urls'
@@ -188,3 +191,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 LOGIN_REDIRECT_URL = '/ap/new'
 # LOGIN_URL = 'django.contrib.auth.views.login'
+BOOTSTRAP4 = {
+            'include_jquery': True,
+            }

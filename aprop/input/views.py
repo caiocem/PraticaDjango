@@ -11,6 +11,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_tables2 import SingleTableView
+from django_tables2.export.views import ExportMixin
 from django_tables2.utils import A  # alias for Accessor
 from rest_framework import viewsets
 from rest_framework.authentication import (BasicAuthentication,
@@ -95,18 +96,14 @@ class ApropriacaoList(LoginRequiredMixin, SingleTableView):
         return qs
 
 
-#    permission_classes = (IsAuthenticated)
-
-
-class ApropriacaoView(LoginRequiredMixin, DetailView):
+class ApropriacaoView(LoginRequiredMixin, ExportMixin, DetailView):
     model = Apropriacao
 
 
-#    permission_classes = (IsAuthenticated)
-
-
-class ApropriacaoCreate(LoginRequiredMixin, CreateView, SingleTableView):
+class ApropriacaoCreate(LoginRequiredMixin, ExportMixin, CreateView,
+                        SingleTableView):
     model = Apropriacao
+    #    template_name = 'django_tables2/bootstrap.html'
 
     form = ApropriacaoForm()
     fields = ['referencia', 'projeto', 'duracao', 'descricao']
@@ -114,7 +111,7 @@ class ApropriacaoCreate(LoginRequiredMixin, CreateView, SingleTableView):
     table_class = ApropriacaoTable
 
     # FIXME - Hack para funcionar apos uma inserçãoõ
-    table = Apropriacao.objects.all()
+    table = Apropriacao.objects.none()
     object_list = table
 
     def get_queryset(self):
@@ -134,32 +131,34 @@ class ApropriacaoCreate(LoginRequiredMixin, CreateView, SingleTableView):
         form = super().get_form()
         generico = Projeto.objects.filter(nome="Genérico").get().pk
         form.fields['projeto'].initial = generico
+
+        form.fields['referencia'].input_formats = ('%Y/%m/%d')
         form.fields['referencia'].widget = DatePickerInput(
-            format='%d/%m/%Y',
+            format='%Y/%m/%d',
             attrs={
                 'placeholder':
-                str(date.day) + "/" + str(date.month) + "/" + str(date.year)
+                str(date.year) + "/" + str(date.month) + "/" + str(date.day)
             },
             options={
-                "showClose":
-                True,
-                "showClear":
-                False,
-                "showTodayButton":
-                True,
-                "defaultDate":
-                str(date.day) + "/" + str(date.month) + "/" + str(date.year)
+                "format": "YYYY/MM/DD",  # moment date-time format
+                "showClose": True,
+                "showClear": False,
+                "showTodayButton": True,
+                #                "defaultDate":
+                #str(date.day) + "/" + str(date.month) + "/" + str(date.year)
             })
-        form.fields['referencia'].initial = str(date.day) + "/" + str(
-            date.month) + "/" + str(date.year)
+        form.fields['referencia'].initial = str(date.year) + "/" + str(
+            date.month) + "/" + str(date.day)
         form.fields['duracao'].widget = TimePickerInput(
             format='%H:%M',
             attrs={'placeholder': '08:00'},
             options={
+                "format": "hh:mm",  # moment date-time format
                 "showClose": True,
                 "showClear": False,
                 "showTodayButton": False,
                 "stepping": 5,
+                #                "defaultDate": "08:00"
             })
         form.fields['duracao'].initial = "08:00"
         return form

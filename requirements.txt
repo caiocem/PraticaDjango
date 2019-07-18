@@ -1,6 +1,9 @@
 Django==2.2.2
+django_tables2_bootstrap4==2.0.0b5
+django_bootstrap_datepicker_plus==3.0.5
+django_tables2==2.0.6
+djangorestframework==3.10.1
 django-extensions==2.1.9
-djangorestframework==3.9.4
 pkg-resources==0.0.0
 pytz==2019.1
 six==1.12.0
