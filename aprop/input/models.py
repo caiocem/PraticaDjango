@@ -1,7 +1,8 @@
 from datetime import timedelta
 
 from django.contrib.auth.models import User
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import (MaxValueValidator, MinValueValidator,
+                                    RegexValidator)
 from django.db import models
 from django.urls import reverse
 
@@ -44,7 +45,8 @@ class Apropriacao(models.Model):
         verbose_name_plural = "Apropriações"
 
     timestamp = models.DateTimeField(auto_now_add=True)
-    referencia = models.DateField()
+    referencia = models.DateField(
+        validators=[RegexValidator(regex="[0-9]{4}-[0-9]{2}-[0-9]{2}")])
     colaborador = models.ForeignKey(User, on_delete=models.PROTECT)
     projeto = models.ForeignKey(Projeto, on_delete=models.PROTECT)
     duracao = models.DurationField(validators=[

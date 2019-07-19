@@ -22,6 +22,7 @@ from django.views.defaults import page_not_found, server_error
 from rest_framework import routers
 
 from aprop.input import views
+from aprop.input.views import ap_redirect
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -34,29 +35,9 @@ handler500 = curry(server_error, template_name='admin/500.html')
 handler404 = curry(page_not_found, template_name='admin/404.html')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    #    path('auth/', include('rest_framework_social_oauth2.urls')),
-    #    path('api-auth/', include('rest_framework.urls',
-    #                              namespace='rest_framework')),
-    #    path('accounts/', include('django.contrib.auth.urls')),
+    path('admin/', admin.site.urls),
     path('social/', include('allauth.urls')),
-
-    #    path('login/', views.home, name='home'),
-    #   path('rest-auth/', include('rest_auth.urls')),
-    #    path('accounts/login/', LoginView.as_view(), name='admin/login.html'),
     path('ap/', views.ApropriacaoList.as_view(), name='apropriacao_list'),
-    path('ap/view/<int:pk>',
-         views.ApropriacaoView.as_view(),
-         name='apropriacao_view'),
     path('ap/new', views.ApropriacaoCreate.as_view(), name='apropriacao_new'),
-    path('ap/view/<int:pk>',
-         views.ApropriacaoView.as_view(),
-         name='apropriacao_view'),
-    path('ap/edit/<int:pk>',
-         views.ApropriacaoUpdate.as_view(),
-         name='apropriacao_edit'),
-    path('ap/delete/<int:pk>',
-         views.ApropriacaoDelete.as_view(),
-         name='apropriacao_delete'),
 ]

@@ -5,11 +5,15 @@
 
 {{ form.media }}
 <h1>Apropriacao de horas da MiningMath</h1>
+
+
 <form method="post">{% csrf_token %}
 	    {% bootstrap_form form %}
 	        <input type="submit" value="Submit" />
 </form>
-<a href="{% export_url "xls" %}"> Download </a>
+<a href="{% export_url "xls" %}"> xls </a>
+<br>
+<a href="/social/logout/"> Logout </a>
 
 {% load django_tables2 %}
 {% render_table table %}

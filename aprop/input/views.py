@@ -1,13 +1,17 @@
 import datetime
 
 import django_tables2 as tables
-from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput
+from bootstrap_datepicker_plus import DatePickerInput
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.contrib.auth.models import Group, User
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.template import loader
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django_tables2 import SingleTableView
@@ -73,15 +77,6 @@ class ApropriacaoViewSet(viewsets.ModelViewSet):
 
 
 class ApropriacaoTable(tables.Table):
-    #    edit = tables.LinkColumn('apropriacao_edit',
-    # text='Editar', args=[A('pk')])
-    #    view = tables.LinkColumn('apropriacao_view',
-    #                             text='Ver detalhes',
-    #                             args=[A('pk')])
-    #    delete = tables.LinkColumn('apropriacao_delete',
-    #                               text='Remover',
-    #                               args=[A('pk')])
-
     class Meta:
         model = Apropriacao
         exclude = ['id', 'timestamp']
@@ -103,14 +98,14 @@ class ApropriacaoView(LoginRequiredMixin, ExportMixin, DetailView):
 class ApropriacaoCreate(LoginRequiredMixin, ExportMixin, CreateView,
                         SingleTableView):
     model = Apropriacao
-    #    template_name = 'django_tables2/bootstrap.html'
 
     form = ApropriacaoForm()
     fields = ['referencia', 'projeto', 'duracao', 'descricao']
     success_url = reverse_lazy('apropriacao_new')
     table_class = ApropriacaoTable
+    login_url = "/social/login"
 
-    # FIXME - Hack para funcionar apos uma inserçãoõ
+    # FIXME - Hack para funcionar apos uma inserção
     table = Apropriacao.objects.none()
     object_list = table
 
@@ -131,67 +126,9 @@ class ApropriacaoCreate(LoginRequiredMixin, ExportMixin, CreateView,
         form = super().get_form()
         generico = Projeto.objects.filter(nome="Genérico").get().pk
         form.fields['projeto'].initial = generico
-
-        form.fields['referencia'].input_formats = ('%Y/%m/%d')
         form.fields['referencia'].widget = DatePickerInput(
-            format='%Y/%m/%d',
-            attrs={
-                'placeholder':
-                str(date.year) + "/" + str(date.month) + "/" + str(date.day)
-            },
-            options={
-                "format": "YYYY/MM/DD",  # moment date-time format
-                "showClose": True,
-                "showClear": False,
-                "showTodayButton": True,
-                #                "defaultDate":
-                #str(date.day) + "/" + str(date.month) + "/" + str(date.year)
-            })
-        form.fields['referencia'].initial = str(date.year) + "/" + str(
-            date.month) + "/" + str(date.day)
-        form.fields['duracao'].widget = TimePickerInput(
-            format='%H:%M',
-            attrs={'placeholder': '08:00'},
-            options={
-                "format": "hh:mm",  # moment date-time format
-                "showClose": True,
-                "showClear": False,
-                "showTodayButton": False,
-                "stepping": 5,
-                #                "defaultDate": "08:00"
-            })
+            format='%Y-%m-%d',
+            attrs={'placeholder': date.isoformat()},
+        )
         form.fields['duracao'].initial = "08:00"
         return form
-
-
-class ApropriacaoUpdate(LoginRequiredMixin, UpdateView, SingleTableView):
-    model = Apropriacao
-    fields = ['referencia', 'projeto', 'duracao', 'descricao']
-    success_url = reverse_lazy('apropriacao_list')
-    table_class = ApropriacaoTable
-    table = Apropriacao.objects.filter(colaborador=1)
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.colaborador = self.request.user
-        self.object.save()
-        return super(UpdateView, self).form_valid(form)
-
-    def get_form(self):
-        date = datetime.datetime.now().date()
-
-        form = super().get_form()
-        form.fields['referencia'].widget = DatePickerInput(
-            format='%d/%m/%Y',
-            attrs={
-                'placeholder':
-                str(date.year) + "/" + str(date.month) + "/" + str(date.day)
-            })
-        form.fields['duracao'].widget = TimePickerInput(
-            format="%H:%M", attrs={'placeholder': '08:00'})
-        return form
-
-
-class ApropriacaoDelete(LoginRequiredMixin, DeleteView):
-    model = Apropriacao
-    success_url = reverse_lazy('apropriacao_list')

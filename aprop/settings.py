@@ -29,30 +29,15 @@ ALLOWED_HOSTS = ['aprop.miningmath.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-    'django_extensions',
-    'aprop.input',
-    'oauth2_provider',
-    'social_django',
-    'rest_framework_social_oauth2',
-    'bootstrap4',
-    'bootstrap_datepicker_plus',
-    'django_tables2',
-    'django_filters',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'django_pdb'
+    'django.contrib.admin', 'django.contrib.auth',
+    'django.contrib.contenttypes', 'django.contrib.sessions',
+    'django.contrib.messages', 'django.contrib.staticfiles',
+    'django.contrib.sites', 'rest_framework', 'rest_framework.authtoken',
+    'rest_auth', 'django_extensions', 'aprop.input', 'oauth2_provider',
+    'social_django', 'rest_framework_social_oauth2', 'bootstrap4',
+    'bootstrap_datepicker_plus', 'django_tables2', 'django_filters', 'allauth',
+    'allauth.account', 'allauth.socialaccount',
+    'allauth.socialaccount.providers.google', 'django_pdb'
 ]
 SITE_ID = 0
 
@@ -65,7 +50,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_pdb.middleware.PdbMiddleware',
-
 ]
 
 ROOT_URLCONF = 'aprop.urls'
@@ -190,7 +174,22 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 )
 LOGIN_REDIRECT_URL = '/ap/new'
+LOGIN_URL = 'social/login'
 # LOGIN_URL = 'django.contrib.auth.views.login'
 BOOTSTRAP4 = {
-            'include_jquery': True,
-            }
+    'include_jquery': True,
+}
+DATE_INPUT_FORMATS = [
+    '%Y-%m-%d',
+    '%Y/%m/%d',
+    '%m/%d/%Y',
+    '%m/%d/%y',  # '2006-10-25', '2006/10/25' , '10/25/2006', '10/25/06'
+    '%b %d %Y',
+    '%b %d, %Y',  # 'Oct 25 2006', 'Oct 25, 2006'
+    '%d %b %Y',
+    '%d %b, %Y',  # '25 Oct 2006', '25 Oct, 2006'
+    '%B %d %Y',
+    '%B %d, %Y',  # 'October 25 2006', 'October 25, 2006'
+    '%d %B %Y',
+    '%d %B, %Y',
+]
