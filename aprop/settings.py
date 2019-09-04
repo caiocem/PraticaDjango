@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'social_django', 'rest_framework_social_oauth2', 'bootstrap4',
     'bootstrap_datepicker_plus', 'django_tables2', 'django_filters', 'allauth',
     'allauth.account', 'allauth.socialaccount',
-    'allauth.socialaccount.providers.google', 'django_pdb'
+    'allauth.socialaccount.providers.google', 'django_pdb', 'import_export'
 ]
-SITE_ID = 0
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -179,6 +179,9 @@ LOGIN_URL = 'social/login'
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
+DATETIME_FORMAT = 'c'
+DATE_FORMAT = 'Y-m-d'
+SHORT_DATE_FORMAT = "Y-m-d"
 DATE_INPUT_FORMATS = [
     '%Y-%m-%d',
     '%Y/%m/%d',
@@ -193,3 +196,6 @@ DATE_INPUT_FORMATS = [
     '%d %B %Y',
     '%d %B, %Y',
 ]
+USE_L10N = False
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+STATIC_ROOT= "/var/www/aprop/static"

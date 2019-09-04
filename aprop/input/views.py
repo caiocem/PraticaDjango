@@ -1,7 +1,7 @@
 import datetime
 
 import django_tables2 as tables
-from bootstrap_datepicker_plus import DatePickerInput
+from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import (LoginRequiredMixin,
@@ -79,7 +79,7 @@ class ApropriacaoViewSet(viewsets.ModelViewSet):
 class ApropriacaoTable(tables.Table):
     class Meta:
         model = Apropriacao
-        exclude = ['id', 'timestamp']
+        exclude = ['id', 'timestamp', 'colaborador']
 
 
 class ApropriacaoList(LoginRequiredMixin, SingleTableView):
@@ -130,5 +130,15 @@ class ApropriacaoCreate(LoginRequiredMixin, ExportMixin, CreateView,
             format='%Y-%m-%d',
             attrs={'placeholder': date.isoformat()},
         )
+        form.fields['duracao'].widget = TimePickerInput(
+            format='%H:%M',
+            attrs={'placeholder': '08:00'},
+            options={
+                "showClose": True,
+                "showClear": False,
+                "showTodayButton": False,
+                "stepping": 5,
+            })
         form.fields['duracao'].initial = "08:00"
+
         return form

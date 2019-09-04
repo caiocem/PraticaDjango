@@ -5,7 +5,8 @@ chardet==3.0.4
 decorator==4.4.0
 defusedxml==0.6.0
 dialite==0.5.2
-Django==2.2.2
+diff-match-patch==20181111
+Django==2.2.5
 django-allauth==0.39.1
 django-bootstrap-datepicker-plus==3.0.5
 django-bootstrap3==11.0.0
@@ -13,6 +14,7 @@ django-bootstrap4==0.0.8
 django-braces==1.13.0
 django-extensions==2.1.9
 django-filter==2.1.0
+django-import-export==1.2.0
 django-oauth-toolkit==1.2.0
 django-pdb==0.6.2
 django-rest-auth==0.9.5
@@ -53,7 +55,7 @@ Pygments==2.4.2
 PyJWT==1.7.1
 python-dateutil==2.8.0
 python3-openid==3.1.0
-pytz==2019.1
+pytz==2019.2
 PyYAML==5.1.1
 requests==2.22.0
 requests-oauthlib==1.2.0

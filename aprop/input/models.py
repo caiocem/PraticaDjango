@@ -21,7 +21,15 @@ from django.urls import reverse
 #         return reverse('colaborador_edit', kwargs={'pk': self.pk})
 
 
-class Colaborador(User):
+class Colaborador(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        verbose_name_plural = "Colaboradores"
+
     def __str__(self):
         return self.email
 
@@ -31,7 +39,10 @@ class Colaborador(User):
 
 class Projeto(models.Model):
     nome = models.CharField(max_length=50)
-    colaborador = models.ForeignKey(User, on_delete=models.PROTECT)
+    colaboradores = models.ManyToManyField(Colaborador)
+
+    class Meta:
+        ordering = ['nome']
 
     def __str__(self):
         return self.nome
@@ -57,8 +68,9 @@ class Apropriacao(models.Model):
     descricao = models.CharField(max_length=2048)
 
     def __str__(self):
-        return str(self.referencia + self.colaborador.email +
-                   self.projeto.nome)
+        return str(
+            str(self.referencia) + "-" + self.colaborador.email + "-" +
+            self.projeto.nome)
 
     def get_absolute_url(self):
         return reverse('apropriacao_new', kwargs={'pk': self.pk})

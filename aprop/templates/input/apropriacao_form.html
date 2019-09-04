@@ -1,9 +1,11 @@
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
-{% load django_tables2 %}
 
 {{ form.media }}
+{{ ApropriacaoForm.media }}
+
+
 <h1>Apropriacao de horas da MiningMath</h1>
 
 
@@ -11,9 +13,11 @@
 	    {% bootstrap_form form %}
 	        <input type="submit" value="Submit" />
 </form>
+
+{% load django_tables2 %}
 <a href="{% export_url "xls" %}"> xls </a>
 <br>
 <a href="/social/logout/"> Logout </a>
 
-{% load django_tables2 %}
+
 {% render_table table %}

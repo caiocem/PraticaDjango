@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin, auth
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
+from django.shortcuts import redirect
 from django.urls import include, path
 from django.utils.functional import curry
 from django.views.defaults import page_not_found, server_error
+from django.views.generic import RedirectView
 from rest_framework import routers
 
 from aprop.input import views
-from aprop.input.views import ap_redirect
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -35,7 +36,8 @@ handler500 = curry(server_error, template_name='admin/500.html')
 handler404 = curry(page_not_found, template_name='admin/404.html')
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', lambda request: redirect('ap/new', permanent=False)),
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('social/', include('allauth.urls')),
     path('ap/', views.ApropriacaoList.as_view(), name='apropriacao_list'),
