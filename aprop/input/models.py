@@ -31,7 +31,7 @@ class Colaborador(models.Model):
         verbose_name_plural = "Colaboradores"
 
     def __str__(self):
-        return self.email
+        return self.user.username
 
     def get_absolute_url(self):
         return reverse('colaborador_edit', kwargs={'pk': self.pk})
@@ -58,7 +58,7 @@ class Apropriacao(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     referencia = models.DateField(
         validators=[RegexValidator(regex="[0-9]{4}-[0-9]{2}-[0-9]{2}")])
-    colaborador = models.ForeignKey(User, on_delete=models.PROTECT)
+    colaborador = models.ForeignKey(Colaborador, on_delete=models.PROTECT)
     projeto = models.ForeignKey(Projeto, on_delete=models.PROTECT)
     duracao = models.DurationField(validators=[
         MinValueValidator(timedelta(0)),
@@ -69,8 +69,8 @@ class Apropriacao(models.Model):
 
     def __str__(self):
         return str(
-            str(self.referencia) + "-" + self.colaborador.email + "-" +
-            self.projeto.nome)
+            str(self.referencia) + "-" + self.colaborador.user.first_name +
+            "." + self.colaborador.user.last_name + "-" + self.projeto.nome)
 
     def get_absolute_url(self):
         return reverse('apropriacao_new', kwargs={'pk': self.pk})

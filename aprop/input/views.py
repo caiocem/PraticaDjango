@@ -110,13 +110,14 @@ class ApropriacaoCreate(LoginRequiredMixin, ExportMixin, CreateView,
     object_list = table
 
     def get_queryset(self):
-        qs = self.model.objects.filter(
-            colaborador=self.request.user).order_by('-referencia')
+        qs = self.model.objects.filter(colaborador=Colaborador.objects.get(
+            user=self.request.user)).order_by('-referencia')
         return qs
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
-        self.object.colaborador = self.request.user
+        self.object.colaborador = Colaborador.objects.get(
+            user=self.request.user)
         self.object.save()
         return super(CreateView, self).form_valid(form)
 
@@ -140,5 +141,11 @@ class ApropriacaoCreate(LoginRequiredMixin, ExportMixin, CreateView,
                 "stepping": 5,
             })
         form.fields['duracao'].initial = "08:00"
+        current_user = self.request.user
+        try:
+            form.fields['projeto'].queryset = Projeto.objects.filter(
+                colaboradores=Colaborador.objects.filter(user=current_user)[0])
+        except:
+            pass
 
         return form

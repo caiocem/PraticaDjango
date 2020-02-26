@@ -1,7 +1,7 @@
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput
 from django.forms import ModelForm
 
-from .models import Apropriacao
+from .models import Apropriacao, Colaborador, Projeto
 
 
 class ApropriacaoForm(ModelForm):
