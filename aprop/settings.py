@@ -24,7 +24,7 @@ SECRET_KEY = 'gf(ve$r+=padw(zf0*#&#e7y9%zu+54q71y&l33)-^64ow(^^9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['aprop.miningmath.com']
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
