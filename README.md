@@ -14,33 +14,37 @@ Será dado o prazo de duas semanas para entrega dos resultados a partir do receb
 
 Quando houver um trabalho submetido mais de uma vez, somente o último será considerado. Na falta de trabalhos submetidos completos, avaliaremos trabalhos submetidos parcialmente, seguindo os mesmo critérios acima. 
 
-O exercício será desenvolvimento em computador próprio, que deverá ter espaço suficiente para executar uma máquina virtual nova.
-
-A plataforma utilizada para avaliar o resultado será a mesma dita no roteiro de preparação do ambiente. 
+O exercício será desenvolvimento em computador próprio, que deverá ter espaço suficiente para executar o código e uma máquina virtual nova.
 
 ## Contexto 
 
-O código disponível neste exercício faz parte de um sistema inacabado de apropriação remota de horas de trabalho desenvolvido por nós, utilizando python 3 e django, e está disponível publicamente sob licenciamento GNU PUBLIC LICENSE V2 para quem quiser usar.
+O código disponível neste exercício faz parte de um sistema inacabado de apropriação remota de horas de trabalho desenvolvido por nós, utilizando python 3 e django 2, e está disponível publicamente sob licenciamento GNU PUBLIC LICENSE V2 para quem quiser usar.
 
 Este código foi escolhido para o exercício devido ao fato de conhecermos o código fonte e sabermos mensurar o esforço de trabalho do que está sendo pedido. 
 
-O trabalho está propositalmente pouco especificado, dando liberdade do candidato desenvolver a solução como achar melhor.
+O trabalho está propositalmente pouco especificado, dando liberdade do candidato desenvolver a solução como achar melhor, desde que siga os objetivos gerais.
 
 O trabalho desenvolvido somente será utilizado para fins de avaliação e não será incorporado ao código original nem utilizado em produção.
 
-## Caso de uso chave
 
-- Uma vez terminado a atividade de um projeto, o colaborador loga no sistema de apropriação, seleciona o projeto e informa quantas horas trabalho foram realizadas e a descrição da atividade.
 
-Não usaremos a interface do colaborador para este exercício, toda a população do banco de dados deverá ser feita pelo admin utilizando a interface de administrador.
+O conjunto de máquina virtual e distribuição descrita no roteiro será a oficial para avaliação das submissões, mas o projeto pode ser desenvolvido no ambiente que o candidato quiser.
+
+## Casos de uso chave
+
+1. Uma vez terminado a atividade de um projeto, o colaborador loga no sistema de apropriação, seleciona o projeto e informa quantas horas trabalho foram realizadas e a descrição da atividade.
+
+   ( Por motivos de simplificação, não usaremos a interface do colaborador para este exercício. Toda a população do banco de dados deverá ser feita pelo admin utilizando a interface de administrador. )
+
+2. O administrador loga no sistema de apropriação e em uma tela específica, vê o somatório de horas mensais de horas por projeto por colaborador.
 
 ## Objetivo do exercício
 
-Criar uma tela de relatório fora das telas de admin que poderá ser acessado somente pelo administrador, no qual será possível ver um relatório mensal de cada projeto de cada colaborador, constando a soma de horas trabalhadas por mês.
+Desenvolver o item 2 dos casos de uso chave.
 
-Avaliaremos como foi desenvolvido a solução tecnicamente. Aspectos relativos a UX e Design não serão considerados na avaliação.
+Avaliaremos como foi desenvolvido a solução tecnicamente. Por motivos de simplificação e redução do tempo dedicado ao exercício, aspectos relativos a UX e Design não serão considerados na avaliação.
 
-## Roteiro inicial de preparação do ambiente:
+## Exercício:
 
 
 
@@ -48,7 +52,7 @@ Avaliaremos como foi desenvolvido a solução tecnicamente. Aspectos relativos a
 
 2. Instalar o VirtualBox 6.1  https://www.virtualbox.org/wiki/Downloads para o seu sistema operacional.
 
-3. Criar uma nova máquina virtual (Sugestão de memória RAM 2GB , disco 10GB) Ubuntu dentro do VirtualBox, utilizando a iso recentemente baixada, configurando o redirecionamento da porta 8000 da máquina virtual para a 8000 local. Para o restante use as opção padrão na instalação.
+3. Criar uma nova máquina virtual Ubuntu dentro do VirtualBox, utilizando a iso recentemente baixada, configurando o redirecionamento da porta 8000 da máquina virtual para a 8000 local. Para o restante use as opção padrão na instalação.
 
 4. Logue na máquina virtual e clone o repositório do exercício:
    `git clone https://gitlab.com/miningmath/sistema_apropriacao.git`
@@ -70,7 +74,18 @@ Avaliaremos como foi desenvolvido a solução tecnicamente. Aspectos relativos a
 
    `python manage.py runserver 0.0.0.0:8000`
 
-   
+7. Do seu computador acesse o http://localhost:8000/admin e acesse a aplicação para conhecer a interface do admin.
 
-Este é um projeto de um sistema de aproriação inacabado, que será 
-utilizado como modelo para o processo seletivo.
+8. No item apropriação, popule pelo menos 3 registros para pelo menos 3 colaboradores diferentes.
+
+9. Desenvolva a tela de relatório conforme o objetivo.
+
+## Submissão dos trabalhos
+
+A submissão dos trabalhos será feita pelo comando git send-mail, para o endereço fabricio.ceolin@miningmath.com. 
+
+
+
+# Notas do candidato
+
+As notas do candidato devem começar aqui...
