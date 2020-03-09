@@ -65,6 +65,8 @@ Avaliaremos como foi desenvolvido a solução tecnicamente. Por motivos de simpl
    python3 -m venv env
    source env/bin/activate
    pip install -r requirements.txt
+   python manage.py makemigrations
+   pythom manage.py migrate
    python manage.py createsuperuser
    ```
 
