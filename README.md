@@ -8,7 +8,7 @@ Apesar de não termos controle sobre o que o candidato já sabe, o processo foi 
 
 Mesmo que você não seja selecionado para seguir conosco neste momento, o conhecimento aqui escolhido para ser estudado será útil para sua vida profissional e você terá um feedback gratuito da sua submissão. 
 
-Como este é um processo de estágio legal, não poderemos tirar dúvidas técnicas no decorrer do processo. Qualquer falta de informação técnica, assuma alguma direção e continue o trabalho de acordo com o que acredita que faça sentido, explicando suas decisões tomadas no arquivo README.md que estarão junto ao código fonte submetido.
+Como este é um processo de estágio legal, não poderemos tirar dúvidas técnicas no decorrer do processo, mas incentivamos que haja perguntas, pois a qualidade das interações também fazem parte do critério de seleção. Qualquer falta de informação técnica, assuma alguma direção e continue o trabalho de acordo com o que acredita que faça sentido, explicando suas decisões tomadas no arquivo README.md que estarão junto ao código fonte submetido.
 
 Será dado o prazo de duas semanas para entrega dos resultados a partir do recebimento do email que dispara essas informações. Entendemos que todos tem suas obrigações, mas cremos que no espaço de duas semanas seja possível alocar horas suficientes para a realização do trabalho. 
 
