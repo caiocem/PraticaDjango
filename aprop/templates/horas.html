@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<link rel="stylesheet" href="horas.css">
+<script src="horas.js"></scrpt>
+
+<h2>{% block title %}Horas Contribuidas {% endblock %}</h2>
+<!---form action="/buscaprojeto"
+ eh feito um busca no banco para verificar os projetos existentes e gerar
+um selector com uma opcao para cada entrada na tabela de projetos-->
+<label>Escolha um projeto para verificar</label>
+<select name="projeto" id="projeto">
+    <option value="Proj1">Projeto 1</option>
+    <option value="Proj2">Projeto 2</option>
+    <option value="Proj3">Projeto 3</option>
+</select>
+<br>
+<!---encerrou o form
+eh submetido qual projeto se deseja consultar pelo selector
+o submit manda para o servidor qual a opcao desejada e 
+retorna com a tabela correspondente com uma entrada para cada coloborador
+e o somatorio de usa horas na apropriacao com o projeto escolhido-->
+<input type="submit" value="Submite" onclick="buscaColabs()">
+
+<div id="resultadobusca" style="display: none">
+  <table style="width:20%">
+    <caption>Contribuicao Mensal em Projeto X</caption>
+    <tr>
+      <th>Colaborador</th>
+      <th>Horas Contribuidas</th>
+    </tr>
+    <tr>
+      <th>Colab 1</th>
+      <th>SOmatorio 1</th>
+    </tr>
+    <tr>
+      <th>Colab 2</th>
+      <th>Somatorio 2</th>
+    </tr> 
+  </table>
+  <button id="close" type="button" onclick="fechabusca()">Fechar Tabela</button>
+
+{% else %}
+<p> fazer o login por favor </p>
+{% endif %}
+
+{% endblock %}
